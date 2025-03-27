@@ -1,7 +1,7 @@
 import { View, Text, Image, TouchableOpacity, StatusBar } from "react-native";
 import React from "react";
 import { styles } from "../styles/auth.styles";
-import { COLORS } from "../constants/theme";
+import { COLORS } from "../../constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { useSSO } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";

@@ -5,7 +5,7 @@ import { useUser } from "@clerk/clerk-expo";
 import { useState } from "react";
 import { styles } from "../styles/create.styles";
 import { Ionicons } from "@expo/vector-icons";
-import { COLORS } from "../constants/theme";
+import { COLORS } from "../../constants/theme";
 
 import { Image } from "expo-image";
 

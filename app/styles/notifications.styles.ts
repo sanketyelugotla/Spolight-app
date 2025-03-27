@@ -1,6 +1,6 @@
 // styles/notifications.styles.ts
 import { StyleSheet } from "react-native";
-import { COLORS } from "../constants/theme";
+import { COLORS } from "../../constants/theme";
 
 export const styles = StyleSheet.create({
     container: {

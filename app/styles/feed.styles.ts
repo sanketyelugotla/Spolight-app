@@ -1,5 +1,5 @@
 // styles/feed.styles.ts
-import { COLORS } from "../constants/theme";
+import { COLORS } from "../../constants/theme";
 import { Dimensions, Platform, StyleSheet } from "react-native";
 
 const { width } = Dimensions.get("window");
