@@ -24,7 +24,7 @@ export const createUser = mutation({
             username: args.username,
             fullName: args.fullName,
             email: args.email,
-            image: args.email,
+            image: args.image,
             followers: 0,
             following: 0,
             posts: 0,
