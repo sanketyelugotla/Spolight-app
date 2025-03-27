@@ -1,7 +1,8 @@
 import { Link } from "expo-router";
-import { Text, TouchableOpacity, View } from "react-native";
+import { StatusBar, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "../styles/auth.styles";
 import { useAuth } from "@clerk/clerk-expo";
+import React from "react";
 
 export default function Index() {
   const { signOut } = useAuth();

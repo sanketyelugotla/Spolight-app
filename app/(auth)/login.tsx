@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, StatusBar } from "react-native";
 import React from "react";
 import { styles } from "../styles/auth.styles";
 import { COLORS } from "../constants/theme";
@@ -11,7 +11,6 @@ export default function login() {
   const router = useRouter();
 
   const handleGoogleSignIn = async () => {
-    console.log("first");
     try {
       const { createdSessionId, setActive } = await startSSOFlow({
         strategy: "oauth_google",

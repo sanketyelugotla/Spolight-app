@@ -14,34 +14,39 @@ export const createPost = mutation({
     },
 
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthorized");
+        try {
 
-        const currentUser = await ctx.db.query("users").withIndex(
-            "by_clerk_id", (q) => q.eq("clerkId", identity.subject)
-        ).first()
+            const identity = await ctx.auth.getUserIdentity();
+            if (!identity) throw new Error("Unauthorized");
 
-        if (!currentUser) throw new Error("User not found");
+            const currentUser = await ctx.db.query("users").withIndex(
+                "by_clerk_id", (q) => q.eq("clerkId", identity.subject)
+            ).first()
 
-        const imageUrl = await ctx.storage.getUrl(args.storageId);
-        if (!imageUrl) throw new Error("Image not found");
+            if (!currentUser) throw new Error("User not found");
 
-        // Create a post
+            const imageUrl = await ctx.storage.getUrl(args.storageId);
+            if (!imageUrl) throw new Error("Image not found");
 
-        const postId = await ctx.db.insert("posts", {
-            userId: currentUser._id,
-            imageUrl,
-            storageId: args.storageId,
-            likes: 0,
-            comments: 0
-        })
+            // Create a post
 
-        // Increment user's post bby one
+            const postId = await ctx.db.insert("posts", {
+                userId: currentUser._id,
+                imageUrl,
+                storageId: args.storageId,
+                likes: 0,
+                comments: 0
+            })
 
-        await ctx.db.patch(currentUser._id, {
-            posts: currentUser.posts + 1
-        })
+            // Increment user's post bby one
 
-        return postId;
+            await ctx.db.patch(currentUser._id, {
+                posts: currentUser.posts + 1
+            })
+
+            return postId;
+        } catch (error) {
+            console.log(error)
+        }
     }
 })

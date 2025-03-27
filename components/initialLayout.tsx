@@ -1,5 +1,6 @@
 import { useAuth } from "@clerk/clerk-expo";
 import { Stack, useRouter, useSegments } from "expo-router";
+import React from "react";
 import { useEffect } from "react";
 
 export default function InitialLayout() {
