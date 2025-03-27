@@ -3,6 +3,7 @@ import React from "react";
 
 import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 import { tokenCache } from "@clerk/clerk-expo/token-cache";
+import * as WebBrowser from "expo-web-browser"; // Added for in-app login
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
@@ -16,10 +17,16 @@ import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { ConvexReactClient } from "convex/react";
 
 const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL!, {
-  unsavedChangesWarning: false,
+    unsavedChangesWarning: false,
 });
 
-export default function ClerkAndConvexProvider({ children }: {children: React.ReactNode}) {
+WebBrowser.maybeCompleteAuthSession(); // Ensures in-app OAuth popup works
+
+export default function ClerkAndConvexProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
       <ConvexProviderWithClerk useAuth={useAuth} client={convex}>
