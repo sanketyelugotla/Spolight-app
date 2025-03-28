@@ -185,7 +185,7 @@ export const deletePost = mutation({
 
         // Decrement user's post count by 1
         await ctx.db.patch(currentUser._id, {
-            posts: Math.max(0, (currentUser.posts || 1) - 1);
+            posts: Math.max(0, (currentUser.posts || 1) - 1)
         })
     }
 })
