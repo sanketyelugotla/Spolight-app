@@ -178,9 +178,9 @@ export const styles = StyleSheet.create({
         marginBottom: 4,
     },
     commentText: {
-        color: COLORS.white,
+        color: COLORS.grey,
         fontSize: 14,
-        lineHeight: 20,
+        lineHeight: 15,
     },
     commentTime: {
         color: COLORS.grey,

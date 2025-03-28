@@ -8,7 +8,7 @@ import React, { useCallback } from "react";
 import { StatusBar } from "react-native";
 import { useFonts } from "expo-font"
 
-SplashScreen.preventAutoHideAsync();
+// SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
 
@@ -16,7 +16,7 @@ export default function RootLayout() {
     "JetBrainsMono-Medium": require("../assets/fonts/JetBrainsMono-Medium.ttf"),
   })
 
-  console.log(fontsLoaded)
+  // console.log(fontsLoaded);
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) await SplashScreen.hideAsync();
