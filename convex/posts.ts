@@ -164,7 +164,7 @@ export const deletePost = mutation({
             .collect();
 
         for (const comment of comments) {
-            await ctx.db.delete(like._id);
+            await ctx.db.delete(comment._id);
         }
 
         // Delete associated bookmarks
