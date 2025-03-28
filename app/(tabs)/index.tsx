@@ -1,16 +1,14 @@
-import { Link } from "expo-router";
-import { FlatList, ScrollView, StatusBar, Text, TouchableOpacity, View } from "react-native";
-import { styles } from "../styles/feed.styles";
-import { useAuth } from "@clerk/clerk-expo";
-import React from "react";
-import { Ionicons } from "@expo/vector-icons";
-import { COLORS } from "../../constants/theme";
-import { STORIES } from "@/constants/mock-data";
-import Story from "@/components/Story";
-import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
 import Loader from "@/components/Loader";
 import Post from "@/components/Post";
+import StoriesSection from "@/components/Storu";
+import { api } from "@/convex/_generated/api";
+import { useAuth } from "@clerk/clerk-expo";
+import { Ionicons } from "@expo/vector-icons";
+import { useQuery } from "convex/react";
+import React from "react";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { COLORS } from "../../constants/theme";
+import { styles } from "../styles/feed.styles";
 
 
 export default function Index() {
@@ -54,18 +52,3 @@ const NoPostsFound = () => (
         <Text style={{ fontSize: 20, color: COLORS.primary }}>No posts yet</Text>
     </View>
 )
-
-
-const StoriesSection = () => {
-    return (
-        <FlatList
-            data={STORIES}
-            renderItem={({ item }) => <Story story={item} />}
-            keyExtractor={(item) => item.id}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingHorizontal: 10 }}
-        />
-
-    )
-}
