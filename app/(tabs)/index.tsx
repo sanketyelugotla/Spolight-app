@@ -1,5 +1,5 @@
 import { Link } from "expo-router";
-import { ScrollView, StatusBar, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, ScrollView, StatusBar, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "../styles/feed.styles";
 import { useAuth } from "@clerk/clerk-expo";
 import React from "react";
@@ -29,25 +29,14 @@ export default function Index() {
                 </TouchableOpacity>
             </View>
 
-            <ScrollView
+            <FlatList
+                data={posts}
+                renderItem={({ item }) => <Post post={{ ...item, caption: item.captions ?? "" }} />}
+                keyExtractor={(item) => item._id}
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={{ paddingBottom: 60 }}
-            >
-                {/* Stories */}
-                <ScrollView
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    style={styles.storiesContainer}
-                >
-                    {STORIES.map((story) => (
-                        <Story key={story.id} story={story} />
-                    ))}
-                </ScrollView>
-
-                {posts.map((post) => (
-                    <Post key={post._id} post={{ ...post, caption: post.captions ?? "" }} />
-                ))}
-            </ScrollView>
+                ListHeaderComponent={<StoriesSection />}
+                contentContainerStyle={{ paddingVertical: 10 }}
+            />
         </View>
     );
 }
@@ -65,3 +54,18 @@ const NoPostsFound = () => (
         <Text style={{ fontSize: 20, color: COLORS.primary }}>No posts yet</Text>
     </View>
 )
+
+
+const StoriesSection = () => {
+    return (
+        <FlatList
+            data={STORIES}
+            renderItem={({ item }) => <Story story={item} />}
+            keyExtractor={(item) => item.id}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingHorizontal: 10 }}
+        />
+
+    )
+}
