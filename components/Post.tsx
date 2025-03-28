@@ -36,6 +36,7 @@ export default function Post({ post }: PostProps) {
 
     const handleLike = async () => {
         try {
+            setIsLiked(!isLiked);
             const newIsLiked = await toggleLike({ postId: post._id });
             setIsLiked(newIsLiked);
 
