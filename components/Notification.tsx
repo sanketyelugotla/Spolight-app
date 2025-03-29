@@ -11,10 +11,15 @@ import { TouchableOpacity } from 'react-native'
 
 export default function Notification({ notifications }: any) {
     return (
-
         <View style={styles.notificationItem}>
             <View style={styles.notificationContent}>
-                <Link href='/notifications' asChild>
+                <Link
+                    href={{
+                        pathname: '/user/[id]',
+                        params: { id: notifications.sender._id }
+                    }}
+                    asChild
+                >
                     <TouchableOpacity style={styles.avatarContainer}>
                         <Image
                             source={notifications.sender.image}
