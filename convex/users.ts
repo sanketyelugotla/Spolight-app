@@ -33,7 +33,6 @@ export const createUser = mutation({
     }
 })
 
-
 export const getUserByClerkId = query({
     args: { clerkId: v.string() },
     handler: async (ctx, args) => {
@@ -57,3 +56,18 @@ export async function getAuthenticatedUser(ctx: QueryCtx | MutationCtx) {
 
     return currentUser;
 }
+
+export const updateProfile = mutation({
+    args: {
+        fullname: v.string(),
+        bio: v.optional(v.string())
+    },
+    handler: async(ctx, args) => {
+        const currentUser = await getAuthenticatedUser(ctx);
+
+        await ctx.db.patch(currentUser._id, {
+            fullName: args.fullname,
+            bio: args.bio
+        })
+    }
+})
